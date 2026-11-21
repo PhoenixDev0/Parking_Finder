@@ -1,4 +1,4 @@
-# 🚗 Parking Finder
+# Parking Finder
 
 <p align="center">
   <img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.2+" />
@@ -17,7 +17,7 @@
 
 ---
 
-## 📋 Sommaire
+## Sommaire
 
 - [Aperçu du projet](#-aperçu-du-projet)
 - [Fonctionnalités clés](#-fonctionnalités-clés)
