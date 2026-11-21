@@ -1,0 +1,30 @@
+# Cache et fichiers temporaires
+cache/*.json
+cache/*.txt
+!cache/.gitkeep
+
+# Journaux et logs
+*.log
+error_log
+
+# Environnement et clés
+.env
+.env.local
+.env.*.local
+
+# Fichiers des éditeurs et IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# Fichiers spécifiques au système d'exploitation
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Dépendances éventuelles
+/vendor/
