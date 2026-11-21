@@ -1,19 +1,22 @@
 <?php
+/**
+ * Contrôleur gérant la vue principale de la carte interactive.
+ */
 class MapController {
     public function __construct() {
-        //Vérification que l'utilisateur est connecté
         if (!isLoggedIn()) {
             header('Location: ' . APP_URL . '?page=auth');
             exit;
         }
     }
 
-    //Affichage de la page de la carte
+    /**
+     * Prépare les données de contexte et affiche l'interface cartographique.
+     */
     public function index(): void {
-        $user = getCurrentUser(); //Récupération de l'utilisateur connecté
-        $csrfToken = generateCSRFToken(); //génération d'un token CSRF
+        $user = getCurrentUser();
+        $csrfToken = generateCSRFToken();
         
-        //Récupération des favoris de l'utilisateur
         $favorites = [];
         if ($user && !empty($user['id'])) {
             $favoriteModel = new Favorite();

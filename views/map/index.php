@@ -88,7 +88,7 @@
         </button>
     </div>
 
-    <!-- Bouton de test de localisation (à supprimer pour publier l'app) -->
+    <!-- Simulation de localisation pour démonstration -->
     <div class="location-test-buttons">
         <span class="test-label">Test:</span>
         <button class="test-btn" id="testMetz" title="Simuler Metz">Metz</button>

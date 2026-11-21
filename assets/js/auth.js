@@ -1,15 +1,15 @@
+/**
+ * Gestion de l'authentification côté client (connexion, inscription, mode invité).
+ */
 document.addEventListener('DOMContentLoaded', function () {
-    //Sélection des éléments HTML
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
-    //Boutons de navigation entre les formulaires de connexion et d'inscription
     const showRegisterBtn = document.getElementById('showRegister');
     const showLoginBtn = document.getElementById('showLogin');
-    //Autres éléments spécifiques
     const guestBtn = document.getElementById('guestBtn');
     const passwordToggles = document.querySelectorAll('.password-toggle');
 
-    //Basculement entre les formulaires de connexion et d'inscription
+    // Basculement vers le formulaire d'inscription
     showRegisterBtn?.addEventListener('click', function () {
         loginForm.classList.add('hidden');
         showRegisterBtn.classList.add('hidden');
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
         showLoginBtn.classList.remove('hidden');
     });
 
-    //Retour au formulaire de connexion
+    // Basculement vers le formulaire de connexion
     showLoginBtn?.addEventListener('click', function () {
         registerForm.classList.add('hidden');
         showLoginBtn.classList.add('hidden');
@@ -25,37 +25,31 @@ document.addEventListener('DOMContentLoaded', function () {
         showRegisterBtn.classList.remove('hidden');
     });
 
-    //Gestion de l'icône de visibilité du mot de passe
+    // Affichage ou masquage du mot de passe
     passwordToggles.forEach(toggle => {
         toggle.addEventListener('click', function () {
-            //Récupération de l'élément ciblé
             const targetId = this.getAttribute('data-target');
             const input = document.getElementById(targetId);
             const icon = this.querySelector('.eye-icon');
 
             if (input.type === 'password') {
-                input.type = 'text'; //Affichage du mot de passe
-                //Changement de l'icône SVG
+                input.type = 'text';
                 icon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>';
             } else {
-                input.type = 'password'; //Masquage du mot de passe
-                //Changement de l'icône SVG
+                input.type = 'password';
                 icon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
             }
         });
     });
 
-    //Gestion de la soumission du formulaire de connexion
+    // Soumission du formulaire de connexion
     loginForm?.addEventListener('submit', async function (e) {
-        //Empêche le comportement par défaut du formulaire
         e.preventDefault();
 
         const btn = document.getElementById('loginBtn');
         const errorDiv = document.getElementById('loginError');
-        //Récupération du token CSRF
         const csrfToken = this.querySelector('[name="csrf_token"]').value;
 
-        //Ajout de l'icône de chargement
         btn.classList.add('loading');
         errorDiv.classList.add('hidden');
         errorDiv.textContent = '';
@@ -64,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const password = document.getElementById('loginPassword').value;
 
         try {
-            //Envoi des données au serveur
             const response = await fetch('?page=auth&action=login', {
                 method: 'POST',
                 headers: {
@@ -79,26 +72,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const data = await response.json();
 
-            //Vérification de la réponse
             if (data.success) {
-                //Redirection vers la page d'accueil
                 window.location.href = data.redirect;
             } else {
-                //Affichage de l'erreur
                 errorDiv.textContent = data.message;
                 errorDiv.classList.remove('hidden');
             }
         } catch (error) {
-            //Gestion des erreurs réseau
             errorDiv.textContent = 'Une erreur est survenue. Veuillez réessayer.';
             errorDiv.classList.remove('hidden');
         } finally {
-            //Suppression de l'icône de chargement
             btn.classList.remove('loading');
         }
     });
 
-    // Gestion de la soumission du formulaire d'inscription (similaire à la soumission du formulaire de connexion mais avec validation du champ de confirmation de mot de passe)
+    // Soumission du formulaire d'inscription
     registerForm?.addEventListener('submit', async function (e) {
         e.preventDefault();
 
@@ -106,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const errorDiv = document.getElementById('registerError');
         const csrfToken = this.querySelector('[name="csrf_token"]').value;
 
-        // Ajout de l'icône de chargement
         btn.classList.add('loading');
         errorDiv.classList.add('hidden');
         errorDiv.textContent = '';
@@ -117,10 +104,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const password = document.getElementById('registerPassword').value;
         const confirmPassword = document.getElementById('registerConfirmPassword').value;
 
-        // Regex pour valider les noms (lettres, espaces, tirets et apostrophes uniquement)
+        // Validation du format du nom et prénom (caractères alphabétiques uniquement)
         const nameRegex = /^[\p{L}\s\-']+$/u;
 
-        // Validation côté client du prénom
         if (firstName.length < 3) {
             errorDiv.textContent = 'Le prénom doit contenir au moins 3 caractères';
             errorDiv.classList.remove('hidden');
@@ -134,7 +120,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Validation côté client du nom
         if (lastName.length < 3) {
             errorDiv.textContent = 'Le nom doit contenir au moins 3 caractères';
             errorDiv.classList.remove('hidden');
@@ -167,10 +152,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const data = await response.json();
 
             if (data.success) {
-                //Redirection vers la page d'accueil
                 window.location.href = data.redirect;
             } else {
-                //Affichage de l'erreur
                 errorDiv.textContent = data.message;
                 errorDiv.classList.remove('hidden');
             }
@@ -182,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    //Accès en mode invité (session temporaire)
+    // Connexion immédiate en mode invité
     guestBtn?.addEventListener('click', async function () {
         try {
             const response = await fetch('?page=auth&action=guest', {

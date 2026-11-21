@@ -28,11 +28,10 @@
 - [Schéma de la Base de Données](#-schéma-de-la-base-de-données)
 - [Endpoints de l'API Interne](#-endpoints-de-lapi-interne)
 - [Auteur & Contexte](#-auteur--contexte)
-- [Licence](#-licence)
 
 ---
 
-## 🌟 Aperçu du projet
+## Aperçu du projet
 
 **Parking Finder** est une plateforme web conçue pour simplifier le stationnement urbain. L'application agrège des données géographiques mondiales (**OpenStreetMap**) et des flux de données publiques en temps réel (**Open Data des collectivités locales**) afin de fournir aux automobilistes une vue claire, précise et actualisée des places de stationnement disponibles autour d'eux.
 
@@ -40,26 +39,26 @@ L'application intègre également un moteur d'itinéraire et un guidage GPS en t
 
 ---
 
-## 🚀 Fonctionnalités clés
+## Fonctionnalités clés
 
-- 🗺️ **Cartographie Interactive & Clustering** : Rendu cartographique fluide sous Leaflet.js avec regroupement dynamique des marqueurs (`Leaflet.markercluster`) pour afficher des milliers de points sans perte de performance.
-- 📡 **Multi-sources de données en direct** :
-  - **OpenStreetMap / Overpass API** : Requêtage spatial mondial (`Overpass QL`) pour localiser les parkings (nœuds et polygones).
+- **Cartographie Interactive & Clustering** : Rendu cartographique fluide sous Leaflet.js avec regroupement dynamique des marqueurs (`Leaflet.markercluster`) pour afficher des milliers de points sans perte de performance.
+- **Multi-sources de données en direct** :
+  - **OpenStreetMap / Overpass API** : Requêtage spatial mondial (`Overpass QL`) pour localiser les parkings.
   - **Open Data Eurométropole de Metz** : Flux WFS GeoJSON officiel affichant l'occupation et les places disponibles en temps réel.
-- 🧭 **Routage dynamique & Guidage vocal** :
+- **Routage dynamique & Guidage vocal** :
   - Calcul d'itinéraires détaillés pas-à-pas (distance, durée) via l'API **OSRM** (Open Source Routing Machine).
   - Navigation vocale automatique intégrée via la **Web Speech API** (`speechSynthesis`).
-- ⚡ **Moteur de Cache Serveur Intelligent (TTL)** :
+- **Moteur de Cache Serveur Intelligent (TTL)** :
   - Système de mise en cache sur disque avec expiration (10 min) réduisant les temps de réponse de 3s à moins de 50ms.
   - Mécanisme de **fallback automatique** : si l'API externe est temporairement indisponible, le dernier cache valide est servi.
-- 👤 **Gestion Utilisateur & Sécurité** :
+- **Gestion Utilisateur & Sécurité** :
   - Authentification par email/mot de passe (hachage **BCRYPT**).
   - Mode **Invité** en un clic pour tester sans inscription.
   - Sessions persistantes sécurisées (*Remember Me* avec jetons uniques et rotation *Sliding Expiration*).
-- ⭐ **Favoris & Export Multi-format** :
+- **Favoris & Export Multi-format** :
   - Sauvegarde personnalisée des parkings préférés.
   - Export direct en **JSON** structuré ou **CSV** (avec BOM UTF-8 pour Excel).
-- 🌓 **Interface Moderne & Ergonomique** :
+- **Interface Moderne & Ergonomique** :
   - Thème sombre et clair dynamique (sauvegarde dans `localStorage`).
   - Choix du fond de carte (OpenStreetMap standard, CartoDB Dark Matter, vue Satellite ESRI).
   - Barre de recherche avec autocomplétion d'adresses (API Nominatim).
@@ -67,7 +66,7 @@ L'application intègre également un moteur d'itinéraire et un guidage GPS en t
 
 ---
 
-## 🏛️ Architecture & Conception
+## Architecture & Conception
 
 L'application est développée selon le patron d'architecture **MVC (Modèle - Vue - Contrôleur)** en PHP natif sans dépendance externe, garantissant une maîtrise totale du cycle de vie des requêtes.
 
@@ -116,7 +115,7 @@ Parking_Finder/
 
 ---
 
-## 💻 Stack Technique
+## Stack Technique
 
 | Domaine | Technologies utilisées |
 | :--- | :--- |
@@ -129,7 +128,7 @@ Parking_Finder/
 
 ---
 
-## 🛡️ Sécurité & Bonnes Pratiques
+## Sécurité & Bonnes Pratiques
 
 L'application intègre des mesures strictes respectant les recommandations de l'**OWASP** :
 
@@ -142,7 +141,7 @@ L'application intègre des mesures strictes respectant les recommandations de l'
 
 ---
 
-## ⚙️ Installation & Démarrage
+## Installation & Démarrage
 
 ### Prérequis
 
@@ -177,7 +176,7 @@ L'application intègre des mesures strictes respectant les recommandations de l'
 
 ---
 
-## 🗄️ Schéma de la Base de Données
+## Schéma de la Base de Données
 
 ```mermaid
 erDiagram
@@ -220,7 +219,7 @@ erDiagram
 
 ---
 
-## 🔌 Endpoints de l'API Interne
+## Endpoints de l'API Interne
 
 Toutes les requêtes AJAX convergent vers `?page=api&action=<ACTION>` :
 
@@ -236,7 +235,7 @@ Toutes les requêtes AJAX convergent vers `?page=api&action=<ACTION>` :
 
 ---
 
-## 🎓 Auteur & Contexte
+## Auteur & Contexte
 
 Projet conçu et développé par **Enzo Tribut**, étudiant en **BUT Informatique** (Bachelor Universitaire de Technologie).
 
@@ -245,9 +244,3 @@ Ce projet a été réalisé pour illustrer la mise en pratique de compétences c
 - Consommation et traitement de données géographiques complexes en temps réel.
 - Sécurisation et durcissement des applications web contre les vulnérabilités standards.
 - Optimisation des performances serveur et client pour le traitement de volumes de données massifs.
-
----
-
-## 📄 Licence
-
-Ce projet est sous licence **MIT** — consultez le fichier [LICENSE](LICENSE) pour plus de détails.

@@ -1,47 +1,45 @@
 <?php
 /**
- * Fichier d'exemple de configuration générale de l'application
- * Copiez ce fichier sous le nom 'config.php' et adaptez les valeurs à votre environnement.
+ * Modèle de configuration générale de l'application.
+ * Copier ce fichier vers 'config.php' et adapter les valeurs à l'environnement cible.
  */
 
 // Paramètres de l'application
-define('APP_NAME', 'Parking Finder'); // Nom de l'application
-define('APP_VERSION', '1.0.0'); // Version sémantique de l'application
-define('APP_URL', 'http://localhost/Parking_Finder'); // URL de base de l'application (adapter selon le dossier htdocs)
+define('APP_NAME', 'Parking Finder');
+define('APP_VERSION', '1.0.0');
+define('APP_URL', 'http://localhost/Parking_Finder');
 
-// Paramètres de la base de données
-define('DB_HOST', 'localhost'); // Hôte de la base de données (XAMPP : localhost)
-define('DB_NAME', 'parking_finder'); // Nom de la base de données
-define('DB_USER', 'root'); // Utilisateur MySQL (défaut XAMPP : root)
-define('DB_PASS', ''); // Mot de passe MySQL (défaut XAMPP : vide)
-define('DB_CHARSET', 'utf8mb4'); // Encodage des caractères
+// Paramètres de connexion MySQL
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'parking_finder');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_CHARSET', 'utf8mb4');
 
-// Configuration de la session
-define('SESSION_LIFETIME', 60 * 60 * 24 * 30); // Durée de vie du cookie 'remember me' (30 jours)
-define('SESSION_NAME', 'parking_finder_session'); // Nom du cookie de session
+// Paramètres de session
+define('SESSION_LIFETIME', 60 * 60 * 24 * 30);
+define('SESSION_NAME', 'parking_finder_session');
 
-// Configuration de la sécurité
-define('CSRF_TOKEN_NAME', 'csrf_token'); // Nom du token CSRF
-define('PASSWORD_MIN_LENGTH', 4); // Longueur minimale du mot de passe
+// Sécurité
+define('CSRF_TOKEN_NAME', 'csrf_token');
+define('PASSWORD_MIN_LENGTH', 4);
 
-// Configuration de la carte
-define('DEFAULT_LAT', 48.8566); // Latitude initiale (Paris)
-define('DEFAULT_LNG', 2.3522); // Longitude initiale (Paris)
-define('DEFAULT_ZOOM', 15); // Zoom initial
-define('DEFAULT_RADIUS', 1000); // Rayon de recherche par défaut (en mètres)
-define('MAX_RADIUS', 15000); // Rayon maximal de recherche (en mètres)
+// Paramètres cartographiques
+define('DEFAULT_LAT', 48.8566);
+define('DEFAULT_LNG', 2.3522);
+define('DEFAULT_ZOOM', 15);
+define('DEFAULT_RADIUS', 1000);
+define('MAX_RADIUS', 15000);
 
-// APIs externes
-define('OVERPASS_API', 'https://overpass-api.de/api/interpreter'); // API Overpass (OpenStreetMap)
-define('NOMINATIM_API', 'https://nominatim.openstreetmap.org'); // API Nominatim (Géocodage)
-define('OSRM_API', 'https://router.project-osrm.org'); // API OSRM (Itinéraires)
+// Endpoints des APIs externes
+define('OVERPASS_API', 'https://overpass-api.de/api/interpreter');
+define('NOMINATIM_API', 'https://nominatim.openstreetmap.org');
+define('OSRM_API', 'https://router.project-osrm.org');
 
-// Paramètres de messagerie
-define('CONTACT_EMAIL', 'contact@parking-finder.local'); // Email de réception des messages
+// Messagerie
+define('CONTACT_EMAIL', 'contact@parking-finder.local');
 
-// Fuseau horaire
+// Environnement et fuseau horaire
 date_default_timezone_set('Europe/Paris');
-
-// Gestion des erreurs (en développement)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
